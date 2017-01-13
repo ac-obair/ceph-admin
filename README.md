@@ -33,3 +33,9 @@ VAULT_PASSWORD=$( echo -n "super_secret" | base64)
 c3VwZXJfc2VjcmV0
 ```
 Passwords can also be **stored encrypted** centrally and/or called via secure requests and injected when being used and never in plain text. i.e. not laying around on a gocd config file somewhere or in a users environment.
+
+### Running
+
+As mentioned the password to decrypt the AES-256 encrypted vault files will be picked up from the shell environment via a password file and fed to ansible via stdout.
+
+`./site.yml -i inventory/prd --vault-password-file ./.vault_pass.py`
