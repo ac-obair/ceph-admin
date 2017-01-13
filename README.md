@@ -5,7 +5,8 @@
 This repo was made for maintaining changes to the core ceph configurations. This can essentially effect anything from performance to replication and data distribution. It's to be used with caution and not by anyone who doesn't understand object storage. 
 
 Here's a link to my gist on how ceph replication actually works:
-*to be added*
+https://gist.github.com/Lighiche/51d8eada4968e3430be4e68a160a6387
+
 
 #### How it works?
 
