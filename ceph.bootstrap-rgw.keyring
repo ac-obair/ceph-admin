@@ -1,0 +1,2 @@
+[client.bootstrap-rgw]
+	key = "{{ vault_client.bootstrap-rgw }}"

@@ -1,0 +1,2 @@
+[client.bootstrap-mds]
+	key = "{{ vault_client.bootstrap-mds }}" 

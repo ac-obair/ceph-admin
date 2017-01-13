@@ -1,0 +1,10 @@
+prdceph-mon00
+prdceph-rgw00
+prdceph-strg01
+prdceph-mon-temp 
+mrlceph-mon01
+mrlceph-rgw01
+mrlceph-strg02
+hltceph-mon02
+hltceph-rgw02
+prdceph-admin

@@ -1,0 +1,2 @@
+[client.bootstrap-osd]
+	key = "{{ vault_client.bootstrap-osd }}"

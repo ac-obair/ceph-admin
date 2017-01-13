@@ -1,0 +1,79 @@
+---
+- name: Ensure Extra Package for Enterprise Linux installed
+  yum: name=epel-release state=present
+  tags:
+    - common
+
+- name: Ensure CentOS system is up to date
+  yum: name=* state=latest
+  tags:
+    - common
+
+- name: Ensure administrative packages for CentOS are installed
+  yum: name={{ item }} state=present
+  with_items:
+   - ntp
+   - rsync
+   - tcpdump
+   - lsof
+   - psmisc
+   - vim
+   - telnet
+   - screen
+   - tree
+   - unzip
+   - yum-plugin-priorities
+   - yum-utils
+   - htop
+   - libselinux-python
+   - firewalld
+   - nc
+   - xfsprogs
+  tags:
+    - common
+
+- name: Ensure ntp is installed
+  yum: name=ntp state=present
+  tags:
+    - common
+
+- name: Ensure firewalld is running, and enabled
+  service: name=firewalld state=started enabled=yes
+
+- name: Ensure /etc/hosts has evenstore nodes
+  blockinfile:
+   dest: "{{ item.dest }}"
+   block: |
+  with_items:
+    - { dest: '/etc/hosts' }
+
+- name: Ensure services are opened
+  firewalld:
+    service: "{{ item.service }}"
+    permanent: "{{ item.permanent }}"
+    zone: "{{ item.zone }}"
+    state: "{{ item.state }}"
+  with_items:
+    - { service: 'ntp',
+        permanent: true,
+        zone: 'public',
+        state: 'enabled' }
+  notify:
+    - restart firewalld
+  tags:
+    - common
+
+- name: Ensure the ntp service is started and enabled
+  service: name=ntpd state=started enabled=yes
+  notify:
+    - ntp update
+  tags:
+    - common
+
+- name: Ensure ntp is configured
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+    - restart ntp
+  tags:
+    - common
+
