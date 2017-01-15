@@ -18,27 +18,7 @@ As the passwordless sudo user `cephuser` on this host the `ceph-deploy/` directo
 
 Ansible will read in a password from the ACS environment in order to decrypt the vault values and provision the ceph configs
 
-### Passwd binary
+#### Passwd binaries
 
-Basic example:
-
-```
-#!/usr/bin/env python
-import os
-
-print os.environ['VALUT_PASSWORD']
-```
-As a result ansible would read in this password from `stdout`
-
-```
-VAULT_PASSWORD=$( echo -n "super_secret" | base64)
-./.vault_pass.py
-c3VwZXJfc2VjcmV0
-```
-Passwords can also be **stored encrypted** centrally and/or called via secure requests and injected when being used and never in plain text. i.e. not laying around on a gocd config file somewhere or in a users environment.
-
-### Running
-
-As mentioned the password to decrypt the AES-256 encrypted vault files will be picked up from the shell environment via a password file and fed to ansible via stdout.
-
-`./site.yml -i inventory/prd --vault-password-file ./.vault_pass.py`
+Refer to this repo for instructions on how a vault password is applied when provisioning with ansible.
+https://github.com/ac-obair/ansible-template
